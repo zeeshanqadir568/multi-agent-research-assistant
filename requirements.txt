@@ -1,4 +1,3 @@
-# multi-agent-research-assistant
 # Multi-Agent Research & Report Assistant
 
 A production-style AI system that performs document research using multiple specialized agents. Instead of relying on a single Retrieval-Augmented Generation (RAG) pipeline, the system plans research, retrieves evidence, verifies claims, writes structured sections, and produces a cited final report.
