@@ -1,0 +1,1 @@
+Retrieval systems search a collection of documents and return the most relevant information for a query. Hybrid retrieval combines dense and sparse methods.
