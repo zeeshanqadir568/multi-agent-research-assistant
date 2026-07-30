@@ -1,34 +1,14 @@
-# Multi-Agent Research & Report Assistant
-
-A production-style AI system that performs document research using multiple specialized agents. Instead of relying on a single Retrieval-Augmented Generation (RAG) pipeline, the system plans research, retrieves evidence, verifies claims, writes structured sections, and produces a cited final report.
-
-## 🚀 Features
-
-- Multi-Agent workflow using LangGraph
-- Hybrid Retrieval (FAISS + BM25)
-- Evidence verification to reduce hallucinations
-- Local LLM support with Ollama
-- FastAPI backend
-- n8n automation support
-- Extensible architecture
-
-## 🛠️ Tech Stack
-
-- Python
-- FastAPI
-- LangGraph
-- LangChain
-- FAISS
-- BM25
-- Sentence Transformers
-- Ollama
-- Pytest
-
-## 📂 Project Status
-
-🚧 Currently in active development.
-Phase 1: Project Foundation
-
-## 📜 License
-
-MIT License
+fastapi
+uvicorn
+langgraph
+langchain
+langchain-community
+sentence-transformers
+faiss-cpu
+rank-bm25
+numpy
+scikit-learn
+pypdf
+python-dotenv
+ollama
+pytest
