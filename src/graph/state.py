@@ -3,7 +3,7 @@ from typing import TypedDict
 
 class GraphState(TypedDict):
     """
-    Shared state passed between all nodes.
+    Shared state passed between all LangGraph nodes.
     """
 
     question: str
