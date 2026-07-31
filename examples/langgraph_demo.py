@@ -15,6 +15,7 @@ for question in questions:
             "question": question,
             "route": "",
             "plan": "",
+            "context": "",
             "answer": "",
         }
     )
