@@ -2,6 +2,10 @@ from langgraph.graph import StateGraph, END
 
 from src.graph.state import GraphState
 
+from src.knowledge.knowledge_base import KnowledgeBase
+
+knowledge_base = KnowledgeBase()
+
 
 def planner_node(state: GraphState):
 
@@ -28,10 +32,19 @@ def retrieval_node(state: GraphState):
 
     print("\n=== Retrieval ===")
 
-    state["answer"] = (
-        "Pretend we searched the vector database.\n"
-        f"Question: {state['question']}"
+    results = knowledge_base.search(
+        state["question"],
+        top_k=3,
     )
+
+    context = "\n\n".join(
+        result.chunk.text
+        for result in results
+    )
+
+    state["context"] = context
+    state["answer"] = context
+    
 
     return state
 
