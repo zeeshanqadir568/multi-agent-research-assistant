@@ -1,0 +1,10 @@
+[project]
+name = "multi-agent-research-assistant"
+version = "0.1.0"
+description = "A multi-agent research assistant using hybrid retrieval and LangGraph."
+readme = "README.md"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
