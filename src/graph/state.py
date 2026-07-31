@@ -1,10 +1,12 @@
+from typing import Literal
 from typing import TypedDict
 
 
 class GraphState(TypedDict):
-    """
-    Shared state passed between all LangGraph nodes.
-    """
-
     question: str
+
+    route: Literal["retrieve", "direct"]
+
+    plan: str
+
     answer: str
