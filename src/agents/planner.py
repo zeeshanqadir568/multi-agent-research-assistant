@@ -1,35 +1,33 @@
-from langchain_core.messages import HumanMessage
-
-
 class PlannerAgent:
     """
-    Decides whether retrieval is needed.
+    Decides how the graph should route a question.
     """
+
+    RETRIEVAL_KEYWORDS = {
+        "what",
+        "who",
+        "when",
+        "where",
+        "why",
+        "how",
+        "explain",
+        "describe",
+        "compare",
+        "research",
+        "summarize",
+        "document",
+        "pdf",
+    }
 
     def run(self, question: str) -> dict:
 
-        question = question.lower()
-
-        retrieval_keywords = [
-            "what",
-            "who",
-            "when",
-            "where",
-            "why",
-            "how",
-            "explain",
-            "describe",
-            "compare",
-            "research",
-            "summarize",
-        ]
+        q = question.lower()
 
         need_retrieval = any(
-            keyword in question
-            for keyword in retrieval_keywords
+            word in q
+            for word in self.RETRIEVAL_KEYWORDS
         )
 
         return {
-            "question": question,
-            "need_retrieval": need_retrieval,
+            "route": "retrieve" if need_retrieval else "direct"
         }
