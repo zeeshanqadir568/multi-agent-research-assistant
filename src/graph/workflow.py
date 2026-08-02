@@ -6,6 +6,12 @@ from src.knowledge.knowledge_base import KnowledgeBase
 
 from src.agents.planner import PlannerAgent
 
+from src.agents.writer import WriterAgent
+from src.services.llm_service import LLMService
+
+llm = LLMService()
+writer = WriterAgent(llm)
+
 planner = PlannerAgent()
 
 knowledge_base = KnowledgeBase()
@@ -23,9 +29,6 @@ def planner_node(state: GraphState):
         if state["route"] == "retrieve"
         else "Answer directly."
     )
-
-
-        
 
     return state
 
@@ -47,6 +50,17 @@ def retrieval_node(state: GraphState):
     state["context"] = context
     state["answer"] = context
     
+
+    return state
+
+def writer_node(state: GraphState):
+
+    print("\n=== Writer ===")
+
+    state["answer"] = writer.run(
+        question=state["question"],
+        context=state["context"],
+    )
 
     return state
 
@@ -87,7 +101,10 @@ builder.add_conditional_edges(
     },
 )
 
-builder.add_edge("retrieval", END)
+builder.add_edge("retrieval", "writer")
+builder.add_edge("writer", END)
+
+builder.add_node("writer", writer_node)
 
 builder.add_edge("direct", END)
 
