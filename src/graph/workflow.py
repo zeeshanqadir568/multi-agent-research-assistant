@@ -4,6 +4,10 @@ from src.graph.state import GraphState
 
 from src.knowledge.knowledge_base import KnowledgeBase
 
+from src.agents.planner import PlannerAgent
+
+planner = PlannerAgent()
+
 knowledge_base = KnowledgeBase()
 
 
@@ -11,19 +15,17 @@ def planner_node(state: GraphState):
 
     print("\n=== Planner ===")
 
-    question = state["question"].lower()
+    decision = planner.run(state["question"])
+    
+    state["route"] = decision["route"]
+    state["plan"] = (
+        "Use hybrid retrieval."
+        if state["route"] == "retrieve"
+        else "Answer directly."
+    )
 
-    if "document" in question or "pdf" in question:
 
-        state["route"] = "retrieve"
-
-        state["plan"] = "Use hybrid retrieval."
-
-    else:
-
-        state["route"] = "direct"
-
-        state["plan"] = "Answer directly."
+        
 
     return state
 
