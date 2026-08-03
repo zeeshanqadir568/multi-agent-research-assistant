@@ -48,7 +48,11 @@ def retrieval_node(state: GraphState):
         result.chunk.text
         for result in results
     )
-
+    state["sources"] = [
+    result.chunk.source
+    for result in results
+]
+    
     state["context"] = context
 
     return state
