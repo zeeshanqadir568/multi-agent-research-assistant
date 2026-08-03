@@ -6,15 +6,17 @@ from src.knowledge.knowledge_base import KnowledgeBase
 
 from src.agents.planner import PlannerAgent
 
+
 from src.agents.writer import WriterAgent
 from src.services.llm_service import LLMService
-
-llm = LLMService()
-writer = WriterAgent(llm)
 
 planner = PlannerAgent()
 
 knowledge_base = KnowledgeBase()
+
+llm_service = LLMService()
+
+writer = WriterAgent(llm_service)
 
 
 def planner_node(state: GraphState):
@@ -48,8 +50,6 @@ def retrieval_node(state: GraphState):
     )
 
     state["context"] = context
-    state["answer"] = context
-    
 
     return state
 
