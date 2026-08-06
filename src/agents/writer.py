@@ -12,12 +12,19 @@ class WriterAgent:
     def run(self, question: str, context: str) -> str:
 
         prompt = f"""
-You are a research assistant.
+You are an AI research assistant.
 
-Answer ONLY using the provided context.
+Your task is to answer the user's question ONLY using the provided context.
 
-If the answer cannot be found in the context,
-say that the information is unavailable.
+Rules:
+- Do not use outside knowledge.
+- If the context does not contain enough information, clearly state that.
+- Be concise but complete.
+- Organize the answer into paragraphs.
+- When appropriate, summarize key points using bullet points.
+- Never invent facts.
+
+
 
 Context:
 {context}
