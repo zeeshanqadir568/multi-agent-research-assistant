@@ -121,7 +121,8 @@ builder.add_conditional_edges(
 )
 
 builder.add_edge("retrieval", "writer")
-builder.add_edge("writer", END)
+builder.add_edge("writer", "verifier")
+builder.add_edge("verifier", END)
 builder.add_edge("direct", END)
 
 graph = builder.compile()
