@@ -68,6 +68,21 @@ def writer_node(state: GraphState):
 
     return state
 
+def verifier_node(state: GraphState):
+
+    print("\n=== Verifier ===")
+
+    verified_answer = verifier.run(
+        question=state["question"],
+        context=state["context"],
+        answer=state["answer"],
+    )
+
+    state["answer"] = verified_answer
+
+    return state
+
+
 
 def direct_node(state: GraphState):
 
@@ -89,10 +104,10 @@ def route_question(state: GraphState):
 builder = StateGraph(GraphState)
 
 builder.add_node("planner", planner_node)
-
 builder.add_node("retrieval", retrieval_node)
-
 builder.add_node("direct", direct_node)
+builder.add_node("writer", writer_node)
+builder.add_node("verifier", verifier_node)
 
 builder.set_entry_point("planner")
 
@@ -107,9 +122,6 @@ builder.add_conditional_edges(
 
 builder.add_edge("retrieval", "writer")
 builder.add_edge("writer", END)
-
-builder.add_node("writer", writer_node)
-
 builder.add_edge("direct", END)
 
 graph = builder.compile()
