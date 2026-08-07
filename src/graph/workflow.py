@@ -8,14 +8,14 @@ from src.agents.planner import PlannerAgent
 
 
 from src.agents.writer import WriterAgent
+from src.agents.verifier import VerifierAgent
 from src.services.llm_service import LLMService
-
-planner = PlannerAgent()
-
-knowledge_base = KnowledgeBase()
 
 llm_service = LLMService()
 
+planner = PlannerAgent()
+knowledge_base = KnowledgeBase()
+verifier = VerifierAgent(llm_service)
 writer = WriterAgent(llm_service)
 
 
