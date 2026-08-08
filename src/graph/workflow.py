@@ -5,16 +5,17 @@ from src.graph.state import GraphState
 from src.knowledge.knowledge_base import KnowledgeBase
 
 from src.agents.planner import PlannerAgent
-
-
 from src.agents.writer import WriterAgent
 from src.agents.verifier import VerifierAgent
+from src.agents.research import ResearchAgent
+
 from src.services.llm_service import LLMService
 
 llm_service = LLMService()
 
 planner = PlannerAgent()
 knowledge_base = KnowledgeBase()
+research = ResearchAgent(knowledge_base)
 verifier = VerifierAgent(llm_service)
 writer = WriterAgent(llm_service)
 
@@ -37,25 +38,18 @@ def planner_node(state: GraphState):
 
 def retrieval_node(state: GraphState):
 
-    print("\n=== Retrieval ===")
+    print("\n=== Research ===")
 
-    results = knowledge_base.search(
-        state["question"],
+    research_result = research.run(
+        question=state["question"],
         top_k=3,
     )
 
-    context = "\n\n".join(
-        result.chunk.text
-        for result in results
-    )
-    state["sources"] = [
-    result.chunk.source
-    for result in results
-]
-    
-    state["context"] = context
+    state["context"] = research_result["context"]
+    state["sources"] = research_result["sources"]
 
     return state
+
 
 def writer_node(state: GraphState):
 
