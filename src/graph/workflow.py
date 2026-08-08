@@ -7,7 +7,7 @@ from src.knowledge.knowledge_base import KnowledgeBase
 from src.agents.planner import PlannerAgent
 from src.agents.writer import WriterAgent
 from src.agents.verifier import VerifierAgent
-from src.agents.research import ResearchAgent
+from src.agents.researcher import ResearchAgent
 
 from src.services.llm_service import LLMService
 
@@ -40,13 +40,20 @@ def retrieval_node(state: GraphState):
 
     print("\n=== Research ===")
 
-    research_result = research.run(
+    results = research.run(
         question=state["question"],
         top_k=3,
     )
 
-    state["context"] = research_result["context"]
-    state["sources"] = research_result["sources"]
+    state["context"] = "\n\n".join(
+        result.chunk.text
+        for result in results
+    )
+
+    state["sources"] = [
+        result.chunk.source
+        for result in results
+    ]
 
     return state
 
