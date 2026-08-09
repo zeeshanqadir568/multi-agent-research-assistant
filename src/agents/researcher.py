@@ -9,11 +9,17 @@ class ResearchAgent:
     def __init__(self, retriever: HybridRetriever):
         self.retriever = retriever
 
-    def run(self, question: str, top_k: int = 5):
+    def run(
+    self,
+    question: str,
+    plan: str,
+    top_k: int = 5,
+):
+        research_query = f"{question}\nResearch plan: {plan}"
 
         results = self.retriever.search(
-            question,
+            research_query,
             top_k=top_k,
         )
-
         return results
+    

@@ -42,6 +42,7 @@ def retrieval_node(state: GraphState):
 
     results = research.run(
         question=state["question"],
+        plan=state["plan"],
         top_k=3,
     )
 
