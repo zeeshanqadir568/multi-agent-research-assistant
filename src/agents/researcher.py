@@ -21,5 +21,15 @@ class ResearchAgent:
             research_query,
             top_k=top_k,
         )
-        return results
+        return {
+           "results": results,
+           "context": "\n\n".join(
+               result.chunk.text
+               for result in results
+           ),
+           "sources": [
+               result.chunk.source
+               for result in results
+    ],
+}
     

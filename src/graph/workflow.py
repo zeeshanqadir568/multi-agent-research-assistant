@@ -40,21 +40,14 @@ def retrieval_node(state: GraphState):
 
     print("\n=== Research ===")
 
-    results = research.run(
+    research_result = research.run(
         question=state["question"],
         plan=state["plan"],
         top_k=3,
     )
 
-    state["context"] = "\n\n".join(
-        result.chunk.text
-        for result in results
-    )
-
-    state["sources"] = [
-        result.chunk.source
-        for result in results
-    ]
+    state["context"] = research_result["context"]
+    state["sources"] = research_result["sources"]
 
     return state
 
