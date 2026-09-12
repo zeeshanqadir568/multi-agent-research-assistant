@@ -7,6 +7,14 @@ specialized agents. Instead of relying on a single Retrieval-Augmented
 Generation (RAG) pipeline, the system plans research, retrieves evidence,
 verifies claims, writes structured sections, and produces a cited final report.
 
+## Screenshots
+
+| API docs | Live `/research` response |
+|---|---|
+| ![API docs](docs/screenshots/mara-1-docs.png) | ![Live answer](docs/screenshots/mara-2-live-answer.png) |
+
+The right screenshot is a real `POST /research` call — the graph routed to retrieval, answered from the seeded knowledge base, and returned its sources.
+
 ## 🚀 Features
 
 - Multi-agent workflow using LangGraph — Planner → Research → Writer → Verifier
