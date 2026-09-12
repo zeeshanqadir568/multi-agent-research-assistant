@@ -26,9 +26,9 @@ def main():
 
     print(f"\nQuery: {query}\n")
 
-    results = researcher.run(query, top_k=3)
+    research_result = researcher.run(query, plan="Answer from the knowledge base.", top_k=3)
 
-    for i, result in enumerate(results, start=1):
+    for i, result in enumerate(research_result["results"], start=1):
 
         print("=" * 50)
         print(f"Result {i}")

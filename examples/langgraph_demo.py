@@ -1,5 +1,6 @@
-from src.graph.workflow import graph
+from src.graph.workflow import build_graph
 
+graph = build_graph()
 
 questions = [
     "What is Retrieval-Augmented Generation?",
@@ -16,6 +17,7 @@ for question in questions:
             "route": "",
             "plan": "",
             "context": "",
+            "sources": [],
             "answer": "",
         }
     )

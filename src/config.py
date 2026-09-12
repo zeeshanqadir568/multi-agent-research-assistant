@@ -6,7 +6,12 @@ Instead of hardcoding values throughout the codebase, every module
 imports settings from here.
 """
 
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # ==========================================================
 # Project Paths
@@ -37,6 +42,13 @@ CHUNK_OVERLAP = 80
 # ==========================================================
 
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+
+# ==========================================================
+# LLM (Ollama)
+# ==========================================================
+
+# Must already be pulled locally: `ollama pull <model>`
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen2.5:latest")
 
 # ==========================================================
 # Hybrid Retrieval

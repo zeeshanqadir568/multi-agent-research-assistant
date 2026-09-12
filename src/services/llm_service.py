@@ -1,12 +1,14 @@
 from langchain_ollama import ChatOllama
 
+from src.config import OLLAMA_MODEL
+
 
 class LLMService:
     """
     Wrapper around the local Ollama model.
     """
 
-    def __init__(self, model: str = "qwen2.5:latest"):
+    def __init__(self, model: str = OLLAMA_MODEL):
 
         self.llm = ChatOllama(
             model=model,
